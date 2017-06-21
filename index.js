@@ -4,9 +4,10 @@ const app = express()
 const port = process.env.PORT || 8080;
 
 app.get('/', function (req, res) {
-  res.send('Hello World!')
+    res.contentType('application/json');
+    res.send(process.env);
 })
 
 app.listen(port, function () {
-  console.log('Example app listening on port ' + port)
+    console.log('Example app listening on port ' + port)
 })
