@@ -7,6 +7,18 @@
   "env": {
     "HEROKU_APP_NAME": {
       "required": true
+    },
+    "DOMAIN": {
+      "required": true
+    },
+    "HEROKU_API_KEY": {
+      "required": true
+    },
+    "DNS_USERNAME": {
+      "required": true
+    },
+    "DNS_API_KEY": {
+      "required": true
     }
   },
   "formation": {
