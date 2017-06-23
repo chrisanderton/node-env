@@ -1,0 +1,22 @@
+#!/bin/bash
+
+FQDN=$APP_NAME.$DOMAIN
+
+curl -n -X POST https://api.heroku.com/apps/$APP_NAME/domains \
+  -d "{
+    \"hostname\": \"$FQDN\"
+  }" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/vnd.heroku+json; version=3" \
+  -H "Authorization: Bearer $HEROKU_API_KEY"
+
+CNAME=`curl -n https://api.heroku.com/apps/$APP_NAME/domains/$FQDN \
+  -H "Accept: application/vnd.heroku+json; version=3" \
+  -H "Authorization: Bearer $HEROKU_API_KEY" | grep herokuspace.com | awk -F: '{print $2}' | sed s/[\ \"\,]//g`
+echo "CNAME is $CNAME"
+
+curl -u "$DNS_USERNAME:$DNS_API_KEY" \
+  -H 'Accept: application/json' \
+  -H "Content-type: application/json" \
+  https://api.pointhq.com/zones/$DOMAIN/records \
+  -d \{\"zone_record\":\{\"name\":\"$APP_NAME\",\"record_type\":\"CNAME\",\"data\":\"$CNAME\",\"ttl\":300\}\}
