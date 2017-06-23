@@ -2,6 +2,7 @@
   "name": "node-env",
   "description": "simple test app exposing environment",
   "scripts": {
+    "postdeploy": "postdeploy"
   },
   "env": {
   },
