@@ -1,6 +1,6 @@
 {
   "name": "node-env",
-  "description": "simple test app exposing environment",
+  "description": "simple test app exposing environment and test postdeploy",
   "scripts": {
     "postdeploy": "postdeploy"
   },
